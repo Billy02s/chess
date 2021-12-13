@@ -1,29 +1,20 @@
 import pygame
-import os
+from piece import Bishop
+from pygame.constants import MOUSEBUTTONDOWN
 
 pygame.init()
-width,height = 800, 800
-board = pygame.display.set_mode((width,height))
+screen_size = 800
+board = pygame.display.set_mode((screen_size,screen_size))
 pygame.display.set_caption("Chess")
 pygame.display.update()
-
-piece_width, piece_height = 100, 100
-
-
-wpawn_image = pygame.image.load('assets/wPawn.png')
-wpawn = pygame.transform.scale(wpawn_image, (piece_width, piece_height))
-bpawn_image = pygame.image.load('assets/bPawn.png')
-bpawn = pygame.transform.scale(bpawn_image, (piece_width, piece_height))
 
 black = (112, 79, 54)
 white = (199, 153, 117)
 
 fps = 60
-
+    
 def draw_board():
-    tile = 100
-    board.fill(white)
-
+    tile = screen_size/8
     count = 2
 
     for i in range(0,8):
@@ -35,11 +26,9 @@ def draw_board():
             count += 1
         count -= 1
 
-    pygame.draw.rect(board, black, [tile,tile,8*tile,8*tile],1)
-    
+    b = Bishop(0,0,"black")
+    b.draw(board)
 
-    board.blit(wpawn,(200, 590))
-    board.blit(bpawn,(200,0))
     pygame.display.update()
 
 
@@ -53,6 +42,12 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
+            
+            if event.type == pygame.MOUSEMOTION:
+                pass
+
+            if event.type == MOUSEBUTTONDOWN:
+                pass
 
     pygame.quit()
 
